@@ -52,8 +52,6 @@ export default function Main() {
                 const amount = "420";
     
                 const value = web3.utils.toWei(amount, "ether");
-    
-                console.log("*********MINTING************", accounts[0]);
                 await instance.methods.mintNFTs().send({
                     from: accounts[0],
                     value,
