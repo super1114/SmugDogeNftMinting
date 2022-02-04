@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react'
-import photo2 from "../assets/images/photo2.jpg"
-import photo1 from "../assets/images/photo1.jpg"
+import photo1 from "../assets/images/11.png"
+import photo2 from "../assets/images/12.png"
+import photo3 from "../assets/images/13.png"
+import photo4 from "../assets/images/14.png"
 import memes from "../assets/images/memes.png"
 
 import Footer from '../layouts/Footer'
@@ -32,28 +34,28 @@ export default function Dashboard() {
             <div className="grid grid-cols-2 gap-2">
               <div className="border-2 border-gray">
                 <img className="w-full" src={memes} alt />
-                <div className="lg:pl-2 text-white text-center"> 
+                <div className="lg:pl-2 text-white text-center">
                   <p className="text-yellow font-bold">Online Furry Yiff</p>
                   <p>1.1M views 95%</p>
                 </div>
               </div>
               <div className="p-2  border-2 border-gray">
                 <img className="w-full" src={memes} alt />
-                <div className="lg:pl-2 text-white text-center"> 
+                <div className="lg:pl-2 text-white text-center">
                   <p className="text-yellow font-bold">Online Furry Yiff</p>
                   <p>180K views 79%</p>
                 </div>
               </div>
               <div className="p-2  border-2 border-gray">
                 <img className="w-full" src={memes} alt />
-                <div className="lg:pl-2 text-white text-center"> 
+                <div className="lg:pl-2 text-white text-center">
                   <p className="text-yellow font-bold">Online Furry Yiff</p>
                   <p>1.6M views 80%</p>
                 </div>
               </div>
               <div className="p-2  border-2 border-gray">
                 <img className="w-full" src={memes} alt />
-                <div className="lg:pl-2 text-white text-center"> 
+                <div className="lg:pl-2 text-white text-center">
                   <p className="text-yellow font-bold">Online Furry Yiff</p>
                   <p>481K views 86%</p>
                 </div>
@@ -79,13 +81,13 @@ export default function Dashboard() {
               </div>
               <div>
                 <div className="border-2 border-gray">
-                  <img src={photo2} alt slot="svg" />
+                  <img src={photo3} alt slot="svg" />
                 </div>
                 <p className="text-sm text-yellow my-2">Umbreon X </p>
               </div>
               <div>
                 <div className="border-2 border-gray">
-                  <img src={photo2} alt slot="svg" />
+                  <img src={photo4} alt slot="svg" />
                 </div>
                 <p className="text-sm text-yellow my-2">Garyu </p>
               </div>
@@ -93,7 +95,7 @@ export default function Dashboard() {
           </div>
         </div>
         <hr className="border-b border-gray opacity-25 my-0 py-0" />
-      </section>      
+      </section>
       <Footer />
     </div>
   )

@@ -1,6 +1,14 @@
 import React, { useState, useEffect } from 'react'
-import photo2 from "../assets/images/photo2.jpg"
-import photo1 from "../assets/images/photo1.jpg"
+import photo1 from "../assets/images/main.png"
+import photo2 from "../assets/images/m1.png"
+import photo3 from "../assets/images/m2.png"
+import photo4 from "../assets/images/m3.png"
+import photo5 from "../assets/images/m4.png"
+import photo6 from "../assets/images/m5.png"
+import photo7 from "../assets/images/m6.png"
+import photo8 from "../assets/images/m7.png"
+import photo9 from "../assets/images/m8.png"
+import photo10 from "../assets/images/m2.png"
 import memes from "../assets/images/memes.png"
 
 import Footer from '../layouts/Footer'
@@ -31,29 +39,29 @@ export default function Dashboard() {
                 <img src={photo2} alt slot="svg" />
               </div>
               <div className="border-2 border-gray">
-                <img src={photo2} alt slot="svg" />
+                <img src={photo3} alt slot="svg" />
               </div>
               <div className="border-2 border-gray">
-                <img src={photo2} alt slot="svg" />
+                <img src={photo4} alt slot="svg" />
               </div>
               <div className="border-2 border-gray-700">
-                <img src={photo2} alt slot="svg" />
+                <img src={photo5} alt slot="svg" />
               </div>
               <div className="border-2 border-gray">
-                <img src={photo2} alt slot="svg" />
+                <img src={photo6} alt slot="svg" />
               </div>
               <div className="border-2 border-gray">
-                <img src={photo2} alt slot="svg" />
+                <img src={photo7} alt slot="svg" />
               </div>
               <div>
                 <div className="border-2 border-gray-700">
-                  <img src={photo2} alt slot="svg" />
+                  <img src={photo8} alt slot="svg" />
                 </div>
                 <p className='mt-5 text-center'>690 ONE</p>
               </div>
               <div>
                 <div className="border-2 border-gray">
-                  <img src={photo2} alt slot="svg" />
+                  <img src={photo9} alt slot="svg" />
                 </div>
                 <p className='mt-5 text-center'>690 ONE</p>
               </div>

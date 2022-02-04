@@ -2,8 +2,12 @@ import React, { useEffect, useState } from 'react'
 import Footer from '../layouts/Footer'
 import memes from '../assets/images/memes.png'
 import flag from '../assets/images/flag.jpg'
-import photo1 from '../assets/images/photo1.jpg'
-import photo2 from '../assets/images/photo2.jpg'
+import photo1 from '../assets/images/1.png'
+import photo2 from '../assets/images/2.png'
+import photo3 from '../assets/images/3.png'
+import photo4 from '../assets/images/4.png'
+import photo5 from '../assets/images/5.png'
+import photo6 from '../assets/images/6.png'
 import { Link } from 'react-router-dom'
 import '../App.css'
 import { useWeb3React } from "@web3-react/core";
@@ -43,14 +47,14 @@ export default function Main() {
 
     const mint = async () => {
         window.ethereum.request({ method: 'eth_requestAccounts' });
-        if(networkId==1666700000) {
+        if (networkId == 1666700000) {
             try {
                 if (!instance) throw new Error(`No Ethereum Instance.`);
-    
+
                 if (!accounts)
                     throw new Error(`No account selected. Try reauthenticating`);
                 const amount = "420";
-    
+
                 const value = web3.utils.toWei(amount, "ether");
                 await instance.methods.mintNFTs().send({
                     from: accounts[0],
@@ -68,8 +72,8 @@ export default function Main() {
     return (
         <div>
             <section className='grid grid-cols-1 lg:grid-cols-3 gap-4 border-b-2 border-midnight'>
-                <div className='meme lg:order-last items-center mt-10 mb-5 lg:mb-0 lg:col-start-3 lg:col-end-4'>
-                    <img src={memes} className="w-full relative cursor-pointer" />
+                <div className='meme lg:order-last items-center mt-20 mb-5 lg:mb-0 lg:col-start-3 lg:col-end-4'>
+                    <img src={memes} className="w-full relative cursor-pointer mt-20" />
                     <div className='kk hidden bg-red text-white absolute text-xl font-bold -mt-20 px-3 py-3 ml-10'>Match free toaster in your area.</div>
                 </div>
                 <div className='text-center lg:text-left flex items-center mb-5 lg:mb-0 lg:col-start-1 lg:col-end-3'>
@@ -92,7 +96,7 @@ export default function Main() {
                                     <span>91%</span>
                                 </div>
                             </a>
-                            <a href='/mintsection2'>
+                            <a href='/mintsection'>
                                 <img src={photo2} className='border-2 border-gray' />
                                 <div class="lg:pl-2 text-white font-bold flex">
                                     <span>1.5M views</span>&nbsp;
@@ -103,8 +107,8 @@ export default function Main() {
                                     <span>96%</span>
                                 </div>
                             </a>
-                            <a href='/mintsection3'>
-                                <img src={photo1} className='border-2 border-gray' />
+                            <a href='/mintsection'>
+                                <img src={photo3} className='border-2 border-gray' />
                                 <div class="lg:pl-2 text-white font-bold flex">
                                     <span>1.1M views</span>&nbsp;
                                     <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-yellow" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -116,8 +120,8 @@ export default function Main() {
                             </a>
                         </div>
                         <div className='flex gap-3'>
-                            <a href='/mintsection4'>
-                                <img src={photo2} className='border-2 border-gray' />
+                            <a href='/mintsection'>
+                                <img src={photo4} className='border-2 border-gray' />
                                 <div class="lg:pl-2 text-white font-bold flex">
                                     <span>1M views</span>&nbsp;
                                     <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-yellow" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -127,8 +131,8 @@ export default function Main() {
                                     <span>89%</span>
                                 </div>
                             </a>
-                            <a href='/mintsection5'>
-                                <img src={photo1} className='border-2 border-gray' />
+                            <a href='/mintsection'>
+                                <img src={photo5} className='border-2 border-gray' />
                                 <div class="lg:pl-2 text-white font-bold flex">
                                     <span>1.3M views</span>&nbsp;
                                     <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-yellow" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -138,8 +142,8 @@ export default function Main() {
                                     <span>93%</span>
                                 </div>
                             </a>
-                            <a href='/mintsection6'>
-                                <img src={photo2} className='border-2 border-gray' />
+                            <a href='/mintsection'>
+                                <img src={photo6} className='border-2 border-gray' />
                                 <div class="lg:pl-2 text-white font-bold flex">
                                     <span>1.4M views</span>&nbsp;
                                     <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-yellow" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -204,19 +208,19 @@ export default function Main() {
                 <div class="container grid grid-cols-3 gap-8 mb-10 mt-10">
                     <div>
                         <div className="border-2 border-gray">
-                            <img src={photo2} alt slot="svg" />
+                            <img src={photo1} alt slot="svg" />
                         </div>
                         <p className="text-center text-2xl text-white mt-4">Project Manager </p>
                     </div>
                     <div>
                         <div className="border-2 border-gray">
-                            <img src={photo1} alt slot="svg" />
+                            <img src={photo2} alt slot="svg" />
                         </div>
                         <p className="text-center text-2xl text-white mt-4">Developer </p>
                     </div>
                     <div>
                         <div className="border-2 border-gray">
-                            <img src={photo2} alt slot="svg" />
+                            <img src={photo3} alt slot="svg" />
                         </div>
                         <p className="text-center text-2xl text-white mt-4">Artist </p>
                     </div>
