@@ -17,6 +17,7 @@ export default function Main() {
     const web3 = new Web3((window).web3.currentProvider);
 
     const [accounts, setAccounts] = React.useState([]);
+    const [networkId, setNetworkId] = React.useState(0);
     const [instance, setInstance] = React.useState(null);
     const [count, setCount] = React.useState(1);
 
@@ -35,52 +36,32 @@ export default function Main() {
 
             setAccounts(accounts);
             setInstance(instance);
+            setNetworkId(networkId);
         };
         init();
     }, []);
 
     const mint = async () => {
         window.ethereum.request({ method: 'eth_requestAccounts' });
-        // const account = await web3.eth.getAccounts();
-        // console.log("address", account[0]);
-        // const balance = web3.eth.getBalance(account[0]);
-        // console.log(balance);
-        try {
-            if (!instance) throw new Error(`No Ethereum Instance.`);
-
-            if (!accounts)
-                throw new Error(`No account selected. Try reauthenticating`);
-            const amount = (0.069 * (count)).toFixed(3);
-
-            const value = web3.utils.toWei(amount, "ONE");
-
-            const gas = (count) => {
-                switch (true) {
-                    case Number(count) > 1 && Number(count) <= 3:
-                        return "250000";
-                    case Number(count) > 3 && Number(count) <= 6:
-                        return "450000";
-                    case Number(count) > 6 && Number(count) <= 9:
-                        return "600000";
-                    case Number(count) > 6 && Number(count) <= 9:
-                        return "600000";
-                    case Number(count) > 9 && Number(count) <= 12:
-                        return "750000";
-                    case Number(count) > 12 && Number(count) <= 15:
-                        return "850000";
-                    case Number(count) > 15:
-                        return "950000";
-                }
-            };
-
-            console.log("*********MINTING************", accounts[0]);
-            await instance.methods.mint(count).send({
-                from: accounts[0],
-                value,
-                gas: gas(count),
-            });
-        } catch (err) {
-            console.log(err);
+        if(networkId==1666700000) {
+            try {
+                if (!instance) throw new Error(`No Ethereum Instance.`);
+    
+                if (!accounts)
+                    throw new Error(`No account selected. Try reauthenticating`);
+                const amount = "420";
+    
+                const value = web3.utils.toWei(amount, "ether");
+                await instance.methods.mintNFTs().send({
+                    from: accounts[0],
+                    value,
+                    gas: 250000,
+                });
+            } catch (err) {
+                console.log(err);
+            }
+        } else {
+            alert("Please change your network to harmony testnet");
         }
     }
 
