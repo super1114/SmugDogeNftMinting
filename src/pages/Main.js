@@ -30,7 +30,7 @@ export default function Main() {
             const instance = new web3.eth.Contract(
                 // @ts-ignore
                 AppContract.abi,
-                "0xF7E1B47E852031A986f192A607b916BE9A432837"
+                "0x75bFeB6e624146989DbDFF6d769E0Ce3d1A7EAeE"
             );
 
             setAccounts(accounts);
@@ -52,7 +52,7 @@ export default function Main() {
                 throw new Error(`No account selected. Try reauthenticating`);
             const amount = (0.069 * (count)).toFixed(3);
 
-            const value = web3.utils.toWei(amount, "ether");
+            const value = web3.utils.toWei(amount, "ONE");
 
             const gas = (count) => {
                 switch (true) {
