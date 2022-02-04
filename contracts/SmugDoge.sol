@@ -1,89 +1,52 @@
-// SPDX-License-Identifier: MIT
+//SPDX-License-Identifier: MIT
 pragma solidity ^0.8.0;
-
-import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
 import "@openzeppelin/contracts/utils/Counters.sol";
 import "@openzeppelin/contracts/access/Ownable.sol";
-
-// import "@openzeppelin/contracts/token/ERC721/extensions/ERC721URIStorage.sol";
-
-contract SmugDoge is ERC721, Ownable {
+import "@openzeppelin/contracts/utils/math/SafeMath.sol";
+import "@openzeppelin/contracts/token/ERC721/extensions/ERC721Enumerable.sol";
+contract SmugDogeNFT is ERC721Enumerable, Ownable {
+    using SafeMath for uint256;
     using Counters for Counters.Counter;
+    uint public constant MAX_SUPPLY = 700;
+    uint public constant PRICE = 420 ether;
+    uint public constant MAX_PER_MINT = 1;
+
+    string public baseTokenURI;
+
     Counters.Counter private _tokenIds;
-
-    uint256 private _maxSupply = 690;
-    string public _baseURL;
-    uint256 public launchDate;
-    mapping(uint256 => string) tokenUrls;
-
-    constructor() ERC721("SmugDoge", "SMD") {
-        setBaseURL("ipfs://");
+    constructor() ERC721("SmugDogeNFT", "SMDG") {
+        setBaseURI("https://gateway.pinata.cloud/ipfs/QmaLoTEQzjkUx89tQzWMcmC97BgRg31KHrCGzYDda1TZyG");
+    }
+    function _baseURI() internal view virtual override returns (string memory) {
+        return baseTokenURI;
     }
 
-    // function mint(string memory metadataURI) external payable {
-    //     require(
-    //         _tokenIds.current() < _maxSupply,
-    //         "Can not mint more than max supply"
-    //     );
-    //     require(msg.value >= 420 ether, "Insufficient payment");
-
-    //     _safeMint(msg.sender, _tokenIds.current());
-    //     // _setTokenURI(_tokenIds.current(), metadataURI);
-    //     _tokenIds.increment();
-    // }
-
-    function mint(uint256 count) external payable {
-        require(
-            _tokenIds.current() < _maxSupply,
-            "Can not mint more than max supply"
-        );
-        require(
-            count > 0 && count <= 12,
-            "You can mint between 1 and 12 at once"
-        );
-        require(msg.value >= count * 0.069 ether, "Insufficient payment");
-        for (uint256 i = 0; i < count; i++) {
-            _tokenIds.increment();
-            _mint(msg.sender, _tokenIds.current());
+    function setBaseURI(string memory _baseTokenURI) public onlyOwner {
+        baseTokenURI = _baseTokenURI;
+    }
+    function mintNFTs() public payable {
+        uint totalMinted = _tokenIds.current();
+        require(totalMinted < MAX_SUPPLY, "Not enough NFTs!");
+        require(msg.value >= PRICE, "Not enough ether to purchase NFTs.");
+        _mintSingleNFT();
+    }
+    function _mintSingleNFT() private {
+        uint newTokenID = _tokenIds.current();
+        _safeMint(msg.sender, newTokenID);
+        _tokenIds.increment();
+    }
+    function tokensOfOwner(address _owner) external view returns (uint[] memory) {
+        uint tokenCount = balanceOf(_owner);
+        uint[] memory tokensId = new uint256[](tokenCount);
+        for (uint i = 0; i < tokenCount; i++) {
+            tokensId[i] = tokenOfOwnerByIndex(_owner, i);
         }
-
-        bool success = false;
-        (success, ) = owner().call{value: msg.value}("");
-        require(success, "Failed to send to owner");
+        return tokensId;
     }
-
-    function getTokenURL(uint256 tokenId) public view returns (string memory) {
-        return tokenUrls[tokenId];
+    function withdraw() public payable onlyOwner {
+        uint balance = address(this).balance;
+        require(balance > 0, "No ether left to withdraw");
+        (bool success, ) = (msg.sender).call{value: balance}("");
+        require(success, "Transfer failed.");
     }
-
-    function setBaseURL(string memory baseURI) public onlyOwner {
-        _baseURL = baseURI;
-    }
-
-    function setMaxSupply(uint256 value) public onlyOwner {
-        _maxSupply = value;
-    }
-
-    // function _baseURI() internal view returns (string memory) {
-    //     return _baseURL;
-    // }
-
-    function maxSupply() public view returns (uint256) {
-        return _maxSupply;
-    }
-
-    // function totalSupply() public view override returns (uint256) {
-    //     return _tokenIds.current();
-    // }
-
-    function withdrawONE(address payable _addr, uint256 amount)
-        public
-        onlyOwner
-    {
-        _addr.transfer(amount);
-    }
-
-    // function withdrawONEOwner(uint256 amount) public onlyOwner {
-    //     msg.sender.transfer(amount);
-    // }
 }
