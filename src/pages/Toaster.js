@@ -8,7 +8,7 @@ import photo6 from "../assets/images/m5.png"
 import photo7 from "../assets/images/m6.png"
 import photo8 from "../assets/images/m7.png"
 import photo9 from "../assets/images/m8.png"
-import photo10 from "../assets/images/m2.png"
+import photo10 from "../assets/images/m9.png"
 import memes from "../assets/images/memes.png"
 
 import Footer from '../layouts/Footer'
@@ -67,7 +67,7 @@ export default function Dashboard() {
               </div>
               <div>
                 <div className="border-2 border-gray">
-                  <img src={photo2} alt slot="svg" />
+                  <img src={photo10} alt slot="svg" />
                 </div>
                 <p className='mt-5 text-center'>690 ONE</p>
               </div>
