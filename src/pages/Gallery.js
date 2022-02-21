@@ -12,7 +12,7 @@ export default function Dashboard() {
       <div className='pt-10 bg-black'>
         <div className='container flex justify-center px-10 mx-auto w-full md:flex-row items-center'>
           <div className="flex justify-center items-center mt-4 pt-4">
-            <img className="w-full" src={main} alt />
+            <img className="w-full" src={main} />
           </div>
         </div>
       </div>

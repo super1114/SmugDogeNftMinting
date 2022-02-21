@@ -25,6 +25,7 @@ export default function Main() {
     const [mySimpleNFTs, setMySimpleNFTs] = React.useState([]);
     const [percent, setPercent] = React.useState("0%");
     const [statusChange, setStatusChange] = React.useState(false);
+    const [networkChage, setNetworkChange] = React.useState(false);
     React.useEffect(() => {
         const init = async () => {
             if(instance&&accounts){
@@ -77,6 +78,38 @@ export default function Main() {
         init();
     }, []);
 
+    React.useEffect(() => {
+        const init = async () => {
+            const accounts = await web3.eth.getAccounts();
+            const networkId = await web3.eth.net.getId();
+            const instance = new web3.eth.Contract(
+                AppContract.abi,
+                "0x65109A163e67078C7812b4D0Fa6857f4d38d2089"
+            );
+            setAccounts(accounts);
+            setInstance(instance);
+            setNetworkId(networkId);
+            
+            if(instance&&accounts){
+                const data = await instance.methods.tokensOfOwner(accounts[0]).call();
+                
+                var sims = []; //My simple Doges
+                for(var i=0;i<data.length;i++) {
+                    if(parseInt(data[i])<690) {
+                        sims.push(data[i]);
+                    }
+                }
+                setMySimpleNFTs(sims);
+                console.log("Account 111", data);
+                console.log(data);
+                const ts = await instance.methods.getCurrentSupply().call();
+                setTotalSupply(ts);
+                setPercent((ts*100/700).toString()+"%");
+            }
+        };
+        init();
+    }, [networkChage]);
+
 
     const mint = async () => {
         if (networkId == 1666700000 || networkId == 1666700001 || networkId == 1666700002 || networkId == 1666700003) {
@@ -102,7 +135,7 @@ export default function Main() {
                 method: 'wallet_switchEthereumChain',
                 params: [{ chainId: "0x6357D2E0" }],
             });
-            setStatusChange(!statusChange);
+            setNetworkChange(!networkChage);
         }
     }
     const connetWallet = async () => {
@@ -131,10 +164,10 @@ export default function Main() {
                         <div className='flex gap-3'>
                             <a href='/mintsection'>
                                 <img src={photo1} className='border-2 border-gray' />
-                                <div class="lg:pl-2 text-white font-bold flex">
+                                <div className="lg:pl-2 text-white font-bold flex">
                                     <span>1.2M views</span>&nbsp;
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-yellow" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 10h4.764a2 2 0 011.789 2.894l-3.5 7A2 2 0 0115.263 21h-4.017c-.163 0-.326-.02-.485-.06L7 20m7-10V5a2 2 0 00-2-2h-.095c-.5 0-.905.405-.905.905 0 .714-.211 1.412-.608 2.006L7 11v9m7-10h-2M7 20H5a2 2 0 01-2-2v-6a2 2 0 012-2h2.5" />
+                                    <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-yellow" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M14 10h4.764a2 2 0 011.789 2.894l-3.5 7A2 2 0 0115.263 21h-4.017c-.163 0-.326-.02-.485-.06L7 20m7-10V5a2 2 0 00-2-2h-.095c-.5 0-.905.405-.905.905 0 .714-.211 1.412-.608 2.006L7 11v9m7-10h-2M7 20H5a2 2 0 01-2-2v-6a2 2 0 012-2h2.5" />
                                     </svg>
                                     &nbsp;
                                     <span>91%</span>
@@ -142,10 +175,10 @@ export default function Main() {
                             </a>
                             <a href='/mintsection'>
                                 <img src={photo2} className='border-2 border-gray' />
-                                <div class="lg:pl-2 text-white font-bold flex">
+                                <div className="lg:pl-2 text-white font-bold flex">
                                     <span>1.5M views</span>&nbsp;
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-yellow" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 10h4.764a2 2 0 011.789 2.894l-3.5 7A2 2 0 0115.263 21h-4.017c-.163 0-.326-.02-.485-.06L7 20m7-10V5a2 2 0 00-2-2h-.095c-.5 0-.905.405-.905.905 0 .714-.211 1.412-.608 2.006L7 11v9m7-10h-2M7 20H5a2 2 0 01-2-2v-6a2 2 0 012-2h2.5" />
+                                    <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-yellow" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M14 10h4.764a2 2 0 011.789 2.894l-3.5 7A2 2 0 0115.263 21h-4.017c-.163 0-.326-.02-.485-.06L7 20m7-10V5a2 2 0 00-2-2h-.095c-.5 0-.905.405-.905.905 0 .714-.211 1.412-.608 2.006L7 11v9m7-10h-2M7 20H5a2 2 0 01-2-2v-6a2 2 0 012-2h2.5" />
                                     </svg>
                                     &nbsp;
                                     <span>96%</span>
@@ -153,10 +186,10 @@ export default function Main() {
                             </a>
                             <a href='/mintsection'>
                                 <img src={photo3} className='border-2 border-gray' />
-                                <div class="lg:pl-2 text-white font-bold flex">
+                                <div className="lg:pl-2 text-white font-bold flex">
                                     <span>1.1M views</span>&nbsp;
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-yellow" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 10h4.764a2 2 0 011.789 2.894l-3.5 7A2 2 0 0115.263 21h-4.017c-.163 0-.326-.02-.485-.06L7 20m7-10V5a2 2 0 00-2-2h-.095c-.5 0-.905.405-.905.905 0 .714-.211 1.412-.608 2.006L7 11v9m7-10h-2M7 20H5a2 2 0 01-2-2v-6a2 2 0 012-2h2.5" />
+                                    <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-yellow" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M14 10h4.764a2 2 0 011.789 2.894l-3.5 7A2 2 0 0115.263 21h-4.017c-.163 0-.326-.02-.485-.06L7 20m7-10V5a2 2 0 00-2-2h-.095c-.5 0-.905.405-.905.905 0 .714-.211 1.412-.608 2.006L7 11v9m7-10h-2M7 20H5a2 2 0 01-2-2v-6a2 2 0 012-2h2.5" />
                                     </svg>
                                     &nbsp;
                                     <span>87%</span>
@@ -166,10 +199,10 @@ export default function Main() {
                         <div className='flex gap-3'>
                             <a href='/mintsection'>
                                 <img src={photo4} className='border-2 border-gray' />
-                                <div class="lg:pl-2 text-white font-bold flex">
+                                <div className="lg:pl-2 text-white font-bold flex">
                                     <span>1M views</span>&nbsp;
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-yellow" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 10h4.764a2 2 0 011.789 2.894l-3.5 7A2 2 0 0115.263 21h-4.017c-.163 0-.326-.02-.485-.06L7 20m7-10V5a2 2 0 00-2-2h-.095c-.5 0-.905.405-.905.905 0 .714-.211 1.412-.608 2.006L7 11v9m7-10h-2M7 20H5a2 2 0 01-2-2v-6a2 2 0 012-2h2.5" />
+                                    <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-yellow" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M14 10h4.764a2 2 0 011.789 2.894l-3.5 7A2 2 0 0115.263 21h-4.017c-.163 0-.326-.02-.485-.06L7 20m7-10V5a2 2 0 00-2-2h-.095c-.5 0-.905.405-.905.905 0 .714-.211 1.412-.608 2.006L7 11v9m7-10h-2M7 20H5a2 2 0 01-2-2v-6a2 2 0 012-2h2.5" />
                                     </svg>
                                     &nbsp;
                                     <span>89%</span>
@@ -177,10 +210,10 @@ export default function Main() {
                             </a>
                             <a href='/mintsection'>
                                 <img src={photo5} className='border-2 border-gray' />
-                                <div class="lg:pl-2 text-white font-bold flex">
+                                <div className="lg:pl-2 text-white font-bold flex">
                                     <span>1.3M views</span>&nbsp;
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-yellow" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 10h4.764a2 2 0 011.789 2.894l-3.5 7A2 2 0 0115.263 21h-4.017c-.163 0-.326-.02-.485-.06L7 20m7-10V5a2 2 0 00-2-2h-.095c-.5 0-.905.405-.905.905 0 .714-.211 1.412-.608 2.006L7 11v9m7-10h-2M7 20H5a2 2 0 01-2-2v-6a2 2 0 012-2h2.5" />
+                                    <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-yellow" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M14 10h4.764a2 2 0 011.789 2.894l-3.5 7A2 2 0 0115.263 21h-4.017c-.163 0-.326-.02-.485-.06L7 20m7-10V5a2 2 0 00-2-2h-.095c-.5 0-.905.405-.905.905 0 .714-.211 1.412-.608 2.006L7 11v9m7-10h-2M7 20H5a2 2 0 01-2-2v-6a2 2 0 012-2h2.5" />
                                     </svg>
                                     &nbsp;
                                     <span>93%</span>
@@ -188,10 +221,10 @@ export default function Main() {
                             </a>
                             <a href='/mintsection'>
                                 <img src={photo6} className='border-2 border-gray' />
-                                <div class="lg:pl-2 text-white font-bold flex">
+                                <div className="lg:pl-2 text-white font-bold flex">
                                     <span>1.4M views</span>&nbsp;
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-yellow" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 10h4.764a2 2 0 011.789 2.894l-3.5 7A2 2 0 0115.263 21h-4.017c-.163 0-.326-.02-.485-.06L7 20m7-10V5a2 2 0 00-2-2h-.095c-.5 0-.905.405-.905.905 0 .714-.211 1.412-.608 2.006L7 11v9m7-10h-2M7 20H5a2 2 0 01-2-2v-6a2 2 0 012-2h2.5" />
+                                    <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-yellow" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M14 10h4.764a2 2 0 011.789 2.894l-3.5 7A2 2 0 0115.263 21h-4.017c-.163 0-.326-.02-.485-.06L7 20m7-10V5a2 2 0 00-2-2h-.095c-.5 0-.905.405-.905.905 0 .714-.211 1.412-.608 2.006L7 11v9m7-10h-2M7 20H5a2 2 0 01-2-2v-6a2 2 0 012-2h2.5" />
                                     </svg>
                                     &nbsp;
                                     <span>95%</span>
@@ -230,8 +263,8 @@ export default function Main() {
                 <div className='container grid grid-cols-3 gap-4 mt-10 mb-10'>
                     {mySimpleNFTs.map((item, index)=> {
                         return(
-                        <div>
-                            <img src={"https://gateway.pinata.cloud/ipfs/QmZLiiPyzZ9V2metcCBWHapNWiWD8U5PvEkVi2LTUDk7Ly/"+(parseInt(item)+1)+".png"} alt slot="svg" />
+                        <div key={index}>
+                            <img src={"https://gateway.pinata.cloud/ipfs/QmZLiiPyzZ9V2metcCBWHapNWiWD8U5PvEkVi2LTUDk7Ly/"+(parseInt(item)+1)+".png"} slot="svg" />
                             <div className='text-center font-bold text-md'>{metadata[item].attributes[0].trait_type +": " + metadata[item].attributes[0].value}</div>
                             <div className='text-center font-bold text-md'>{metadata[item].attributes[1].trait_type +": " + metadata[item].attributes[1].value}</div>
                             <div className='text-center font-bold text-md'>{metadata[item].attributes[2].trait_type +": " + metadata[item].attributes[2].value}</div>
@@ -272,22 +305,22 @@ export default function Main() {
                     Our Team
                 </div>
 
-                <div class="container grid grid-cols-3 gap-8 mb-10 mt-10">
+                <div className="container grid grid-cols-3 gap-8 mb-10 mt-10">
                     <div>
                         <div className="border-2 border-gray">
-                            <img src={photo1} alt slot="svg" />
+                            <img src={photo1} slot="svg" />
                         </div>
                         <p className="text-center text-2xl text-white mt-4">Project Manager </p>
                     </div>
                     <div>
                         <div className="border-2 border-gray">
-                            <img src={photo2} alt slot="svg" />
+                            <img src={photo2} slot="svg" />
                         </div>
                         <p className="text-center text-2xl text-white mt-4">Developer </p>
                     </div>
                     <div>
                         <div className="border-2 border-gray">
-                            <img src={photo3} alt slot="svg" />
+                            <img src={photo3} slot="svg" />
                         </div>
                         <p className="text-center text-2xl text-white mt-4">Artist </p>
                     </div>

@@ -16,7 +16,7 @@ export default function Dashboard() {
             className="flex flex-col w-full md:w-2/3 rounded-md justify-center items-start text-center md:text-left py-5 mt-5 border-2 border-gray bg-metal">
             <div className="grid grid-cols-1 gap-2">
               <div className="flex justify-center items-center mt-4 pt-4">
-                <img className="w-full md:w-2/5" src={photo1} alt />
+                <img className="w-full md:w-2/5" src={photo1} />
               </div>
             </div>
             <h1 className="text-white px-4 text-2xl font-bold pt-4">SmugHub Director</h1>
@@ -33,28 +33,28 @@ export default function Dashboard() {
           <div className="w-full md:w-1/3 py-8 pl-12 text-center">
             <div className="grid grid-cols-2 gap-2">
               <div className="border-2 border-gray">
-                <img className="w-full" src={memes} alt />
+                <img className="w-full" src={memes}  />
                 <div className="lg:pl-2 text-white text-center">
                   <p className="text-yellow font-bold">Online Furry Yiff</p>
                   <p>1.1M views 95%</p>
                 </div>
               </div>
               <div className="p-2  border-2 border-gray">
-                <img className="w-full" src={memes} alt />
+                <img className="w-full" src={memes}  />
                 <div className="lg:pl-2 text-white text-center">
                   <p className="text-yellow font-bold">Online Furry Yiff</p>
                   <p>180K views 79%</p>
                 </div>
               </div>
               <div className="p-2  border-2 border-gray">
-                <img className="w-full" src={memes} alt />
+                <img className="w-full" src={memes}  />
                 <div className="lg:pl-2 text-white text-center">
                   <p className="text-yellow font-bold">Online Furry Yiff</p>
                   <p>1.6M views 80%</p>
                 </div>
               </div>
               <div className="p-2  border-2 border-gray">
-                <img className="w-full" src={memes} alt />
+                <img className="w-full" src={memes}  />
                 <div className="lg:pl-2 text-white text-center">
                   <p className="text-yellow font-bold">Online Furry Yiff</p>
                   <p>481K views 86%</p>
@@ -75,19 +75,19 @@ export default function Dashboard() {
             <div className="grid grid-cols-3 gap-8">
               <div>
                 <div className="border-2 border-gray-700">
-                  <img src={photo2} alt slot="svg" />
+                  <img src={photo2}  slot="svg" />
                 </div>
                 <p className="text-sm text-yellow my-2">Blowjob-yiff </p>
               </div>
               <div>
                 <div className="border-2 border-gray">
-                  <img src={photo3} alt slot="svg" />
+                  <img src={photo3}  slot="svg" />
                 </div>
                 <p className="text-sm text-yellow my-2">Umbreon X </p>
               </div>
               <div>
                 <div className="border-2 border-gray">
-                  <img src={photo4} alt slot="svg" />
+                  <img src={photo4}  slot="svg" />
                 </div>
                 <p className="text-sm text-yellow my-2">Garyu </p>
               </div>

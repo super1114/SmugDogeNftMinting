@@ -168,7 +168,7 @@ export default function Dashboard() {
             {myMemes.map((item, index)=> {
                 return(
                   <div className="border-2 border-gray-700">
-                    <img src={"https://gateway.pinata.cloud/ipfs/QmZLiiPyzZ9V2metcCBWHapNWiWD8U5PvEkVi2LTUDk7Ly/"+item+".png"} alt slot="svg" />
+                    <img src={"https://gateway.pinata.cloud/ipfs/QmZLiiPyzZ9V2metcCBWHapNWiWD8U5PvEkVi2LTUDk7Ly/"+item+".png"} slot="svg" />
                   </div>)
             })}
             </div>
